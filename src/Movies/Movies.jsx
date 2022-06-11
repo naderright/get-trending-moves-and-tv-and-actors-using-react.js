@@ -1,21 +1,11 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import { useState } from 'react'
+import React from 'react'
 import {  useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { MediaContext } from '../MediaContext';
 
 export default function Movies() {
-  const [movie, setMovie] = useState([]);
 
-  async function getTrending(typeMedia,callback){
-    let{data} =await axios.get(`https://api.themoviedb.org/3/trending/${typeMedia}/week?api_key=f1aca93e54807386df3f6972a5c33b50`)
-    callback(data.results);
-  }
-
-  useEffect(()=>{
-
-    getTrending('movie',setMovie);
-    
-  },[]);
+  const {movie} = useContext(MediaContext);
 
 
  let navigate=useNavigate()
@@ -30,7 +20,7 @@ export default function Movies() {
   }  ;
   return (
     <>
-    <div className="row py-4">
+    {movie?<div className="row py-4">
          <div className="col-md-4 py-3">
            <div className="brdr w-25 my-3"></div>
            <h2 className='h3'>Trending <br /> Movies <br /> To Watch Now</h2>
@@ -41,12 +31,17 @@ export default function Movies() {
          {movie.map((movie,index)=>
            <div onClick={()=>getId(movie.id,'movie')} key={index} className="col-md-2">
              <div className="movie">
-               <img className='w-100 my-1' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+             <div className="image position-relative w-100 ">
+                <img className=' w-100 my-1' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                <span className='bg-info position-absolute rate'>{movie.vote_average}</span>
+              </div>
                <h3 className='h6 mt-3'>{movie.title}</h3>
              </div>
            </div>
          )}
-    </div>
+    </div>:""
+    }
+    
     
     </>
   )

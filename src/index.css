@@ -39,6 +39,7 @@ img:hover{
   cursor: pointer;
   transform: scale(1.1);
 }
+
 .brdr{
   height: 1px;
   background-color:#a8a8a83d !important;
@@ -50,4 +51,15 @@ a,a:hover{
 input{
   background-color: transparent !important;
   color: #fff !important;
+}
+
+.rate{
+  font-size: 12px;
+  font-weight: bold;
+  padding: .3rem;
+  top: 1.5%;
+  right: -1%;
+  min-width: 1.5rem;
+  text-align: center;
+  transition: all .5s;
 }

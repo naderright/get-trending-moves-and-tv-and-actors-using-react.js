@@ -5,28 +5,31 @@ import { useState, useEffect } from 'react';
 
 export default function Details() {
 
-    const [searchParam, setSearchParam] = useSearchParams();
+    const [searchParam] = useSearchParams();
     const [details, setDetails] = useState([]);
     const currenId = searchParam.get('id');
-    console.log(currenId)
+    // setSearchParam(currenId);
 
 
-    async function getDetails() {
-        const { data } = await axios.get(`https://api.themoviedb.org/3/${currenId}?api_key=3f1c84ef0e9ef75d40bd7b4725160b8c&language=en-US`)
-        setDetails(data);
-        console.log(data);
-    }
+   
     // jj
 
-    useEffect(() => { getDetails(); }, []);
+    useEffect(() => { 
+        async function getDetails() {
+            const { data } = await axios.get(`https://api.themoviedb.org/3/${currenId}?api_key=3f1c84ef0e9ef75d40bd7b4725160b8c&language=en-US`)
+            setDetails(data);
+            // console.log(data);
+        };
+        getDetails();
+     });
     return (
         <>
 
             <div className="row">
                 <div className="col-md-5 py-4">
                     <div className="image w-75" >
-                        {details.poster_path ? <img className='w-100' src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} />
-                            : <img className='w-100' src={`https://image.tmdb.org/t/p/w500${details.profile_path}`} />
+                        {details.poster_path ? <img className='w-100' alt='' src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} />
+                            : <img className='w-100' alt='' src={`https://image.tmdb.org/t/p/w500${details.profile_path}`} />
 
                         }
                     </div>

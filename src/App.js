@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import Details from './Details/Details';
 import Tv from './Tv/Tv';
 import About from './About/About';
+import { MediaContextProvider } from './MediaContext';
 
 function App() {
   const [userData, setUserData] = useState(null)
@@ -33,26 +34,28 @@ function App() {
   }
   function ProtectedRoute({ children }) {
     if (!localStorage.getItem('userToken')) {
-      return <Navigate to='/login'/>;
+      return <Navigate to='/login' />;
     } else {
       return children;
     }
   }
   return (
     <div>
-      <Navbar  userData={userData} logOut={logOut} />
+      <Navbar userData={userData} logOut={logOut} />
       <div className='container pt-5'>
-        <Routes>
-          <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path='home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path='movies' element={<ProtectedRoute><Movies /></ProtectedRoute>} />
-          <Route path='Tv' element={<ProtectedRoute><Tv /></ProtectedRoute>} />
-          <Route path='about' element={<ProtectedRoute><About /></ProtectedRoute>} />
-          <Route path='details' element={<ProtectedRoute><Details /></ProtectedRoute>} />
-          <Route path='register' element={<Register />} />
-          <Route path='login' element={<Login getUserData={getUserData} />} />
-          <Route path='*' element={<h2>404</h2>} />
-        </Routes>
+        <MediaContextProvider>
+          <Routes>
+            <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+            <Route path='home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+            <Route path='movies' element={<ProtectedRoute><Movies /></ProtectedRoute>} />
+            <Route path='Tv' element={<ProtectedRoute><Tv /></ProtectedRoute>} />
+            <Route path='about' element={<ProtectedRoute><About /></ProtectedRoute>} />
+            <Route path='details' element={<ProtectedRoute><Details /></ProtectedRoute>} />
+            <Route path='register' element={<Register />} />
+            <Route path='login' element={<Login getUserData={getUserData} />} />
+            <Route path='*' element={<h2>404</h2>} />
+          </Routes>
+        </MediaContextProvider>
       </div>
 
     </div>
