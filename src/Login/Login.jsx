@@ -66,7 +66,7 @@ export default function Login(props) {
  }
   
   return (
-    <div>
+    <div className='pt-4'>
         <h2 className='my-3'>Login Now</h2>
         {validError.map((error,index)=>{
              if(index===1){
