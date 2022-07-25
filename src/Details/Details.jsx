@@ -44,7 +44,7 @@ export default function Details() {
                         <div className="vote-watch row align-content-center align-items-center ">
                             <div className="col-lg-6 d-flex align-items-center mb-4">
                                 {details.vote_average ? <p className='fs-4 h-50 my-0'>Vote :</p> : <p className='fs-4 h-50 my-0'>Popularity :</p>}
-                                {details.vote_average ? <span className='px-2 bg-danger ms-2 text-center h-50'>{details.vote_average}</span> : <span className='px-2 bg-danger ms-2 text-center h-50'>{details.popularity}</span>}
+                                {details.vote_average ? <span className='px-2 bg-danger ms-2 text-center h-50'>{details.vote_average.toString().slice(0,3)}</span> : <span className='px-2 bg-danger ms-2 text-center h-50'>{details.popularity}</span>}
                             </div>
                             <div className="col-lg-6 align-content-end">
                                 <div className="btn btn-danger ms-auto mb-4"> <i className="fa-solid fa-play"></i> Watch Now</div>

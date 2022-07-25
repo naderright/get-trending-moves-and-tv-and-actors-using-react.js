@@ -84,7 +84,7 @@ export default function Login(props) {
         <input onChange={getUser} type="text" name='email' id='email' className='form-control my-3' />
 
         <label htmlFor="password">password</label>
-        <input onChange={getUser} type="text" name='password' id='password' className='form-control my-3' />
+        <input onChange={getUser} type="password" name='password' id='password' className='form-control my-3' />
 
         <button  className='btn btn-outline-info'>
           {loding?<i className='fas fa-spinner fa-spin '></i>:'Login'}

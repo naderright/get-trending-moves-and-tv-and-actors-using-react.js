@@ -33,7 +33,7 @@ export default function Movies() {
              <div className="movie">
              <div className="image position-relative w-100 ">
                 <img className=' w-100 my-1' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-                <span className='bg-info position-absolute rate'>{movie.vote_average}</span>
+                <span className='bg-info position-absolute rate'>{movie.vote_average.toString().slice(0,3)}</span>
               </div>
                <h3 className='h6 mt-3'>{movie.title}</h3>
              </div>

@@ -26,7 +26,7 @@ export default function Register() {
     last_name:Joi.string().alphanum().min(3).max(8).required(),
     age:Joi.number().min(16).max(80).required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-    password: Joi.string().pattern(/^[a-z][0-9]{3}$/)
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
    });
   return schema.validate(user,{abortEarly:false});
 

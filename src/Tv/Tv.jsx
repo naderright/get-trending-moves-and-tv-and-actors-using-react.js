@@ -31,7 +31,7 @@ const {tv} = useContext(MediaContext);
             <div className="tv">
               <div className="image position-relative w-100 ">
                 <img className='w-100 my-1' src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`} alt={tv.title} />
-                <span className='bg-info position-absolute rate'>{tv.vote_average}</span>
+                <span className='bg-info position-absolute rate'>{tv.vote_average.toString().slice(0,3)}</span>
               </div> 
                <h3 className='h6 mt-3'>{tv.name}</h3>
             </div>
