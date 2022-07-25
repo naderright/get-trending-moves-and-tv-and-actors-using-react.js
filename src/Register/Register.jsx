@@ -15,8 +15,7 @@ export default function Register() {
    email:'',
    password:''
   
- });
-  
+ }); 
  const [lastErrore,setLastErrore]=useState('');
  const [invalidPassword,setInvalidPassword]=useState('');
 
@@ -86,14 +85,14 @@ export default function Register() {
   return (
     <div className='pt-4'>
         <h2 className='my-3'>Register Now</h2>
-        {validError.map((error,index)=>{
+        {validError? validError.map((error,index)=>{
              if(lastErrore.includes("password")){
                validError[validError.length-1].message=invalidPassword;
                return <div key={index} className="alert alert-danger">{error.message}</div>
              }else{
               return <div key={index} className="alert alert-danger">{error.message}</div>
              }
-        })}
+        }):''}
         {error?<div className="allert alert-danger p-2 rounded">{error}</div>:''}
         
       <form className='py-3' onSubmit={submitRegister}>
