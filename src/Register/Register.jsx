@@ -62,9 +62,9 @@ export default function Register() {
     
 
   }else{
-    let {data}=await axios.post('https://route-egypt-api.herokuapp.com/signup',user);
+    let {data}=await axios.post('https://naderright.github.io/crud-operation-API/signup',user);
 
-   if(data.message === 'success'){
+   if(data.message === 'success login'){
        //navigat to login
        setLoding(false);
        navigate('/login');
