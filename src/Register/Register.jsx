@@ -62,7 +62,7 @@ export default function Register() {
     
 
   }else{
-    let {data}=await axios.post('https://naderright.github.io/crud-operation-API/signup',user);
+    let {data}=await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup',user);
 
    if(data.message === 'success login'){
        //navigat to login
