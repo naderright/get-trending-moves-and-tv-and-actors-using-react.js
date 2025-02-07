@@ -9,11 +9,11 @@ export default function Register() {
   const [loding, setLoding] = useState(false);
   const [error, setError] = useState('');
  const [user, setUser] = useState({
-   first_name:'',
-   last_name:'',
-   age:0,
-   email:'',
-   password:''
+  name: '',
+  email: '',
+  password: '',
+  rePassword: '',
+  phone: '',
   
  }); 
  const [lastErrore,setLastErrore]=useState('');
@@ -21,11 +21,11 @@ export default function Register() {
 
  function valideteRegisterForm(user){
    let schema = Joi.object({
-    first_name:Joi.string().alphanum().min(3).max(8).required(),
-    last_name:Joi.string().alphanum().min(3).max(8).required(),
-    age:Joi.number().min(16).max(80).required(),
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+    name:Joi.string().alphanum().min(3).max(8).required(),
+    phone:Joi.number(),
+    email:Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    rePassword: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
    });
   return schema.validate(user,{abortEarly:false});
 
@@ -48,7 +48,7 @@ export default function Register() {
     setLoding(false);
     setValidError(validation.error.details);
     console.log(validation.error.details)
-    setLastErrore(validation.error.details[validation.error.details.length-1].message)
+    setLastErrore(validation.error.details[validation.error.details.length-1].messemail)
     const numColum=validation.error.details[validation.error.details.length-1].message.lastIndexOf(':')
     // console.log(validation.error.details[validation.error.details.length-1].message.slice(0,62))
    console.log(numColum)
@@ -63,6 +63,9 @@ export default function Register() {
 
   }else{
     let {data}=await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup',user);
+
+    console.log(data);
+    
 
    if(data.message === 'success login'){
        //navigat to login
@@ -97,20 +100,20 @@ export default function Register() {
         
       <form className='py-3' onSubmit={submitRegister}>
         
-        <label htmlFor="first_name">first_name</label>
-        <input onChange={getUser} type="text" name='first_name' id='first_name' className='form-control my-3' />
+        <label htmlFor="name">Name</label>
+        <input onChange={getUser} type="text" name='name' id='name' className='form-control my-3' />
 
-        <label htmlFor="last_name">last_name</label>
-        <input onChange={getUser} type="text" name='last_name' id='last_name' className='form-control my-3' />
-
-        <label htmlFor="age">age</label>
-        <input onChange={getUser} type="number" name='age' id='age' className='form-control my-3' />
+        <label htmlFor="phone">Phone</label>
+        <input onChange={getUser} type="number" name='phone' id='phone' className='form-control my-3' />
 
         <label htmlFor="email">Email</label>
-        <input onChange={getUser} type="text" name='email' id='email' className='form-control my-3' />
+        <input onChange={getUser} type="email" name='email' id='email' className='form-control my-3' />
 
-        <label htmlFor="password">password</label>
+        <label htmlFor="password">Password</label>
         <input onChange={getUser} type="password" name='password' id='password' className='form-control my-3' />
+
+        <label htmlFor="rePassword">rePassword</label>
+        <input onChange={getUser} type="password" name='rePassword' id='rePassword' className='form-control my-3' />
 
         <button  className='btn btn-outline-info'>
           {loding?<i className='fas fa-spinner fa-spin '></i>:'Register'}
